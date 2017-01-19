@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+    <script src="jquery-2.0.3.js"></script>
+</head>
+<body>
+<!--<div ng-app="">-->
+    <!--&lt;!&ndash;视图变化的时候  数据变化了&ndash;&gt;-->
+    <!--请输入你的值:<input type="text" ng-model="name">-->
+    <!--&lt;!&ndash;{{name}}&ndash;&gt;-->
+    <!--&lt;!&ndash;数据变化的时候  视图变化了&ndash;&gt;-->
+    <!--<span ng-bind="name"></span>-->
+<!--</div>-->
+
+<!--<div>-->
+    <!--请输入你的值:<input type="text" id="change">-->
+    <!--<span id="result"></span>-->
+<!--</div>-->
+<div ng-app="" ng-init="click=false">
+    <button ng-click="click=!click">显示/隐藏</button>
+    <div ng-hide="click">
+        请输入一个值: <input type="text" ng-model="name">
+        hello <span ng-bind="name"></span>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+<!--<script>-->
+    <!--$(function () {-->
+        <!--$('#change').keydown(function () {-->
+            <!--var result = $(this).val();-->
+            <!--$('#result').html(result);-->
+        <!--})-->
+    <!--})-->
+<!--</script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

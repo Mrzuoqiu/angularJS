@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body ng-init="text='just a demo'">
+{{text|ezUC:true}}
+</body>
+</html>
+<script>
+    angular.module('lzy',[])
+            .filter('ezUC',function () {
+                return function (input,cp) {
+                    if(!cp) return input.toUpperCase();
+                    var output = input.replace(/\b\w+\b/g,function (word) {
+                         return word.substring(0,1).toUpperCase() + word.substring(1);
+
+                    });
+                    return output;
+                }
+            })
+    angular.bootstrap(document,['lzy']);
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lzy">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<clock></clock>
+</body>
+</html>
+<script>
+    //创建一个lyy的模块
+    var app = angular.module('lzy',[]);
+    //在该指令下 创建一个指令
+                             //例如此处click是标签 所以restrict的值为E的时候才可以替换
+    //clock是要被替换的内容 根据restrict的值不同可以作为标签 属性 CSS类  注释等 replace决定替换的是标签+内容还是仅仅是内容
+    app.directive('clock',function () {
+        return {
+            restrict:"E",
+            replace:true,
+            template:"<div class='clock'></div>",
+            link:function (scope,element,attrs) {
+                console.log(scope);
+                console.log(element);
+                console.log(attrs);
+
+//                setInterval(function () {
+//                    var date = new Date();
+//                    element.text(date.toString());
+//                },1000)
+
+            }
+        }
+    })
+//    angular.bootstrap(document,'lzy')
+</script>

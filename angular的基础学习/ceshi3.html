@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.min.js"></script>
+</head>
+<body>
+<!--在这里显示ezHello实例的内容-->
+<div id="logger"></div>
+</body>
+</html>
+
+<script>
+//在ezstuff模块上登记一个服务ezHello
+angular.module("ezstuff",[])
+.provider("ezHello",function(){
+//$get方法是一个类工厂，返回服务的实例
+this.$get = function(){
+return "hello,world!";
+};
+});
+
+angular.element(document).ready(function(){
+angular.injector(["ng","ezstuff"]).invoke(function(ezHello){
+    //不能直接将$http存放在dom中 必须创建注入器,经由注入器存放 显示输出
+//将ezHello实例对象转成字符串显示出来
+var e = document.querySelector("#logger");
+angular.element(e).text(ezHello);
+});
+});
+</script>

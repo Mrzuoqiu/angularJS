@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="lyy" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<p>下面是图片</p>
+<ez-duang></ez-duang>
+<img src="http://ww4.sinaimg.cn/bmiddle/757eb2ffjw1eptcr4qobjg209205dthh.gif" alt="">
+<!--<img src="1448119062716.jpeg" alt="">-->
+
+
+</body>
+</html>
+
+<script>
+    angular.module('lyy',[])
+            .directive('ezDuang',function () {
+                return{
+                    restrict:"E",
+                    template:"<img src='http://ww4.sinaimg.cn/bmiddle/757eb2ffjw1eptcr4qobjg209205dthh.gif'>"
+                }
+            })
+</script>
+<script>
+    window.addEventListener('DOMContentLoaded',function () {
+        alert(1);
+    })
+    window.onload = function () {
+        alert('全部加载完成');
+    }
+
+</script>

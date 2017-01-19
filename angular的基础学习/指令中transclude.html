@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="ezstuff">
+<head>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="ezCtrl">
+    <ez-dialog>
+        <p>Check out the contents, {{name}}!</p>
+        <p><button>Ok,I will</button></p>
+    </ez-dialog>
+</div>
+</body>
+</html>
+<script>
+    angular.module("ezstuff", [])
+            .controller("ezCtrl", ["$scope", function($scope) {
+                $scope.name = "Mr. Whoami";
+            }])
+            .directive("ezDialog", function() {
+                return {
+                    restrict: "E",
+                    replace : true,
+                    transclude: true,
+                    template: "<div class='ez-dialog'><div class='header'>alert</div><div class='content' ng-transclude></div></div>"
+                };
+            });
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-init="text='just a demo'">
+    {{text|ezUC}}
+</div>
+</body>
+</html>
+<script>
+    angular.module('lzy',[])
+            .filter('ezUC',function () {
+                return function(item){
+                    return item.toUpperCase();
+                }
+
+            })
+    angular.bootstrap(document,['lzy']);
+</script>

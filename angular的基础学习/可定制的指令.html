@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<ez-customer sb="Emmy"></ez-customer>
+<ez-customer sb="Edison"></ez-customer>
+</body>
+</html>
+<script>
+    angular.module('lzy',[])
+            .controller('myCtrl',function ($scope) {
+                $scope.Emmy = {
+                    name:'Emmy',
+                    address:'Emmy is good'
+                };
+                $scope.Edison = {
+                    name:'Edison',
+                    address:'Edison is better'
+                }
+
+            })
+            .directive('ezCustomer',function () {
+                return{
+                    restrict:'E',
+                    replace:true,
+                    scope:{
+                        //指令传递过来的值我们可以在这里被接收
+                        //myId:'@'   @绑定的就是普通的字符串
+                        //myname: '='  =绑定的就是数据了 控制器中的数据
+                        //myFn: '&'  &绑定的是控制器中的函数
+                        //maDate: '='
+
+
+                        customer:'=sb',
+                    },
+                    template:'<div>name:{{customer.name}} address:{{customer.address}}</div>'
+                }
+            })
+    angular.bootstrap(document,['lzy']);
+</script>

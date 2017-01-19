@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="lyy" ng-controller="myCtrl">
+    <div ng-repeat="item in items">
+        <div>name:{{item.name}},age:{{item.age}}</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module('lyy',[]);
+    app.controller('myCtrl',['$scope','$http',function ($scope,$http) {
+        $scope.items = [
+            {name:'jack',age:30},
+            {name:'tom',age:20},
+            {name:'ross',age:25},
+            {name:'bill',age:37},
+        ]
+
+    }])
+</script>

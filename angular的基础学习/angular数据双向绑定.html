@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="lyy" ng-init="sb = { name :'somebody' ,age: 30}">
+<ez-namecard data="sb"></ez-namecard>
+<!--创建一个指令-->
+<div ez-logger data="sb"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+  angular.module('lyy',[])
+          .directive('ezNamecard',function() {
+    return{
+      restrict:'E',
+      replace:true,
+      template:'<div class='namecard'></div>',
+      link:function(scope,element,attrs){
+        var model = attrs.data;
+        //插入到表单元素中去
+        element.append("<li>name:<input type='text' field='name'></li>")
+                .append("<li>age:<input type='text' field='name'></li>");
+        //监听keydown事件  修改数据
+        element.find('input').on('keyup',function (ev) {
+          var field = ev.target.getAttrubute('field')
+            scope[model][field] = ev.target.value;
+            scope.$apply();
+
+        })
+      }
+    }
+  })
+          .directive('ezLogger',function () {
+              return{
+                  restrict:'A',
+                  link:function (scope,element,attrs) {
+                      var model = attrs.data;
+                      scope.$watch(model,function (nv) {
+                          var data = JSON.stringify(nv);
+                          element.html(data.toString);
+                      },true)
+                  }
+              }
+          })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

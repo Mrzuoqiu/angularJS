@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<hello></hello>
+</body>
+</html>
+<script>
+
+    //自定义一个模块 并且创建一个ezhello的服务
+    angular.module('ezstuff',[])
+            .provider('ezhello',function () {
+                this.$get = function () {
+                    return "hello world";
+                }
+
+            })
+    //我要在当前页面下使用这个模块选的服务 其原理应该是
+    angular.element(document).ready(function () {
+        var injector = angular.injector(['ng','ezstuff']);
+        //这种参数注入的形式容易在代码压缩的时候出现问题
+//        injector.invoke(function (ezhello) {
+//            console.dir(ezhello.toString());
+//        })
+        //所以这时候,,我们需要采用数组注入的方式
+//        injector.invoke(["ezhello",function (ezhello) {
+//            console.log(ezhello.toString());
+//        }])
+
+        //还可以使用get方法 获取到服务的实例
+//        var hello = injector.get("ezhello");
+//        console.log(typeof hello);
+//        console.log(hello);
+//        console.log(hello.toString());
+    })
+    //隐式的注入应该是
+    angular.module('lzy',['ezstuff'])
+            .directive('hello',["ezhello",function (e) {
+                return {
+                    restrict:'E',
+                    replace:true,
+                    template:"<div id='result'></div>",
+                    link:function (scope,element,attrs) {
+                        element.text(e.toString());
+                    }
+                }
+            }])
+    angular.bootstrap(document,['lzy']);
+    //注入器在释放的时候 尽量采用数组注入的形式["服务1","服务2",function(a,b){}]  数组前面的数与方法里的形参一一对应
+</script>

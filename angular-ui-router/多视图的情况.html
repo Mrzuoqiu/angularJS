@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由的配置</title>
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
+</head>
+<body>
+<a ui-sref="home">状态1</a>
+<a ui-sref="school">状态2</a>
+<a ui-sref="classroom">状态3</a>
+<div ui-view=""></div>
+<div ui-view="main"></div>
+</body>
+</html>
+<script>
+    //注入
+    var app = angular.module('lzy',['ui.router']);
+    //设置一下angularJS的全局变量
+    app.run(function ($rootScope,$state,$stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+
+    })
+    //最后一步
+    app.config(["$stateProvider","$urlRouterProvider",function ($stateProvider,$urlRouterProvider) {
+        //开始写路由
+        //使用$urlRouterProvider设置一下视图的默认状态
+        $urlRouterProvider.otherwise('/home');
+        //开始在$stateProvider上设置路由
+        $stateProvider
+                .state('home',{
+                    url:'/home',
+                    template:'home',
+                    views:{
+                        '':{
+                            template:"home状态下的第一个视图的HTML"
+                        },
+                        'main':{
+                            template:"home状态下的第二个视图的HTML"
+                        }
+                    }
+                })
+                .state('school',{
+                    url:'/school',
+                    template:'school',
+                    views:{
+                        '':{
+                            template:"school状态下的第一个视图的HTML"
+                        },
+                        'main':{
+                            template:"school状态下的第一个视图的HTML"
+                        }
+
+                    }
+                })
+                .state('classroom',{
+                    url:'/classroom',
+                    template:'classroom',
+                    views:{
+                        '':{
+                            template:"classroom状态下的第一个视图的HTML"
+                        },
+                        'main':{
+                            template:"classroom状态下的第一个视图的HTML"
+                        }
+
+                    }
+                })
+
+    }])
+    //启动
+    angular.bootstrap(document,['lzy']);
+</script>

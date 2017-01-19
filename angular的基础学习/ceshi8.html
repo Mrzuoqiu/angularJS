@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="ezstuff">
+<head>
+    <script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="ezCtrl">
+    <ez-customer sb="Emmy"></ez-customer>
+    <ez-customer sb="Edison"></ez-customer>
+</div>
+</body>
+</html>
+
+<script>
+angular.module("ezstuff",[])
+.controller("ezCtrl", ["$scope", function($scope) {
+$scope.Emmy = {
+name: "Emmy",
+address: "1600 Amphitheatre"
+};
+$scope.Edison = {
+name: "Edison",
+address: "2500 Amphitheatre"
+};
+}])
+.directive("ezCustomer", function() {
+return {
+restrict:"E",
+replace:true,
+scope:{
+customer:"=sb",
+},
+template: "<div>Name: {{customer.name}} Address: {{customer.address}}</div>"
+};
+});
+</script>

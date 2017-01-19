@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--<html ng-app='lzy'>-->
+<html data="$injector={},$rootScope={}">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<p>下面应该能看到一张图片:</p>
+<ez-duang></ez-duang>
+</body>
+</html>
+<script>
+    //模拟启动的第一步，就是创建一个注入器
+    //在当前的DOM元素上绑定这个注入器
+    angular.element(document).ready(function(){
+        var injector = angular.injector(['ng','lzy']);
+        //console.log(injector);
+        angular.element(document).data('$injector',injector);
+        //console.log(angular.element(document).data('$injector'));
+
+        //模拟启动第二步，创建根作用域
+        var rootScope = injector.get('$rootScope');
+        angular.element(document).data("$rootScope",rootScope);
+
+        //模拟启动第三步，启动$compile服务
+        var compile = injector.get('$compile');
+        compile(document)(rootScope);
+    })
+    angular.module('lzy',[])
+            .directive('ezDuang',function(){
+                return {
+                    restrict:'E',
+                    replace:true,
+                    template:"<img src='http://ww4.sinaimg.cn/bmiddle/757eb2ffjw1eptcr4qobjg209205dthh.gif'>"
+                }
+            })
+</script>

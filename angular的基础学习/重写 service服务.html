@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lzy">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<button onclick="doCalc()">3+4=?</button>
+<div id="result"></div>
+</body>
+</html>
+<script>
+    function doCalc() {
+        var injector = angular.injector(['lzy']);
+        var ezCalc = injector.get('ezCalc');
+        var result = ezCalc.add(3,4);
+        document.querySelector('#result').textContent = result;
+    }
+    angular.module('lzy',[])
+            .service('ezCalc',function () {
+
+                        this.add = function(a,b){return a+b;},
+                        this.subtract = function(a,b){return a-b;},
+                        this.multiply = function(a,b){return a*b;},
+                        this.divide = function(a,b){return a/b;}
+
+            })
+    //这中写法跟factory的区别在于 所有的方法和属性都必须挂在到this上 能用service写的服务也一定可以
+    // 使用factory 一般情况下 factory 能满足80%以上的服务定制
+
+</script>

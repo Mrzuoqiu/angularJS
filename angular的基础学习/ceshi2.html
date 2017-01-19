@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.min.js"></script>
+</head>
+<body>
+<!--在这里显示$http的内容-->
+<div id="logger"></div>
+</body>
+</html>
+<script>
+
+angular.element(document).ready(function(){
+angular.injector(["ng"]).invoke(function($http){  //不能直接将$http存放在dom中 必须创建注入器,经由注入器存放 显示输出
+//将$http对象转成字符串显示出来
+var e = document.querySelector("#logger");
+angular.element(e).text($http.toString());
+});
+});
+</script>

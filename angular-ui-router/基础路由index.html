@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由的配置</title>
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
+</head>
+<body>
+<a ui-sref="/">主页</a>
+<a ui-sref="/about">关于</a>
+<div ui-view=""></div>
+</body>
+</html>
+<script>
+    //注入
+    var app = angular.module('lzy',['ui.router']);
+    //设置一下angularJS的全局变量
+    app.run(function ($rootScope,$state,$stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+
+    })
+    //最后一步
+    app.config(["$stateProvider","$urlRouterProvider",function ($stateProvider,$urlRouterProvider) {
+        //开始写路由
+        //使用$urlRouterProvider设置一下视图的默认状态
+        $urlRouterProvider.otherwise('/');
+        //开始在$stateProvider上设置路由
+        $stateProvider
+                .state('/',{
+                    url:'/',
+                    template:'主页'
+                })
+                .state('/about',{
+                    url:'/about',
+                    template:'关于'
+                })
+
+    }])
+    //启动
+    angular.bootstrap(document,['lzy']);
+</script>

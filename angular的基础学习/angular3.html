@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="bxl" ng-controller="myCtrl">
+    请输入一个名字：<input type="text" ng-model="person.name">
+    <span ng-bind="person.name"></span>
+    <button ng-click="sayHi()">点0.0</button>
+    </div>
+</body>
+</html>
+<script>
+    var app = angular.module('bxl',[]);
+    app.controller('myCtrl',function ($scope) {
+        $scope.person = {
+            name:'0.0'
+        }
+        $scope.sayHi = function () {
+            alert('666');
+        }
+    })
+
+</script>

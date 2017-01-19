@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<button onclick="showName()">show your name</button>
+<div id="result"></div>
+</body>
+</html>
+<script>
+    function showName() {
+        var injector = angular.injector(['lzy']);
+        var name = injector.get('name');
+        document.querySelector("#result").textContent = name;
+    }
+    angular.module('lzy',[])
+            .value('name','who am i');
+    //value一般用来存储一些公共的长期的变量和数据 可以对它进行修改
+</script>

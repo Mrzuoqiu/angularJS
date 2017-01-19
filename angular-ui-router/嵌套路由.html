@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套路由</title>
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
+</head>
+<body>
+<!--在这里可以不加 /  -->
+<a ui-sref="home">home状态</a>
+<a ui-sref="school">school状态</a>
+<a ui-sref="classroom">classroom状态</a>
+<div ui-view=""></div>
+</body>
+</html>
+<script>
+    var app = angular.module('lzy',['ui.router']);
+    app.run(function ($rootScope,$state,$stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    })
+    app.config(["$stateProvider","$urlRouterProvider",function ($stateProvider,$urlRouterProvider) {
+        //开始写路由
+        //使用$urlRouterProvider设置一下视图的默认状态
+        $urlRouterProvider.when('','/home').when('/home','/home/tab1');
+        //开始在$stateProvider上设置路由
+        $stateProvider
+                //状态上也可以不加 /
+                .state('home',{
+                    //在URL上要加 / 代表当前的根目录
+                    url:'/home',
+                    template:"home <a ui-sref='home.tab1'>home.tab1</a>" + "<a ui-sref='home.tab2'>home.tab2</a> <div ui-view=''></div>"
+
+                })
+                .state('home.tab1',{
+                    url:'/tab1',
+                    template:'tab1'
+                })
+                .state('home.tab2',{
+                    url:'/tab2',
+                    template:'tab2'
+                })
+                .state('school',{
+                    url:'/school',
+                    template:'school',
+
+                })
+                .state('classroom',{
+                    url:'/classroom',
+                    template:'classroom',
+
+                })
+    }])
+    angular.bootstrap(document,['lzy']);
+</script>

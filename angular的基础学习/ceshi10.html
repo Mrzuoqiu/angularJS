@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="ezstuff">
+<head>
+    <script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.min.js"></script>
+</head>
+<body ng-init="text='just a demo!'">
+<p>{{text|ezUC}}</p></body>
+</html>
+<script>
+//过滤器对象工厂定义
+var ezUCFilterFactory = function(){
+//过滤器对象返回的是一个过滤函数
+var filter = function(input){
+return input.toUpperCase();
+}
+return filter;
+};
+angular.module("ezstuff",[])
+//使用模块的filter()接口注册过滤器
+.filter("ezUC",ezUCFilterFactory);
+</script>

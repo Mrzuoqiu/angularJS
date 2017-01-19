@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<!--吧$http这个服务输出到div里面去-->
+<div id="logger"></div>
+<ez-namecard></ez-namecard>
+
+</body>
+</html>
+<script>
+//    angular.element(document).ready(function () {
+//        var injector = angular.injector(['ng']);
+//        injector.invoke(function ($http) {
+//            var div = document.querySelector('#logger');
+//            div.innerHTML = $http.toString();
+//        })
+//        injector.invoke(function ($rootScope) {
+//            var div = document.querySelector('#logger');
+//            div.innerHTML = $rootScope.toString();
+//            console.log($rootScope);
+//        })
+//    })
+    //对应的隐式调用的代码
+    angular.module('lyy',['ng'])
+            .directive('ezNamecard',function ($http) {
+                return{
+                    restrict:'E',
+                    template:'<div></div>',
+                    link:function (scope,element,attrs) {
+                        console.log($http);
+                        element.text($http.toString());
+                    }
+                }
+
+
+            })
+    angular.bootstrap(document,['lyy']);
+
+    //默认调用的ng模块应该长这样
+    angular.module(['ng'])
+            .provider('$http',function () {
+//                $http服务指令代码
+            })
+            .provider('$location',function () {
+
+            })
+            .directive('ngModel',function () {
+                //内置指令的定义
+            })
+            .directive('ngBind',function () {
+
+            })
+           //....
+
+</script>
